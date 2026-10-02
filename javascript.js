@@ -4,6 +4,9 @@
 // Create function playRound() with 2 arguments - humanScore and computerScore, case insensitive, console.log()
 // playRound function - 5 rounds, declares winner at the end. playRound is inside of playGame.
 
+let humanScore = 0;
+let computerScore = 0;
+
 function getComputerChoise() {
     const computerChoice = Math.floor(Math.random() * 3);
     
