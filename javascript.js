@@ -5,9 +5,9 @@
 // playRound function - 5 rounds, declares winner at the end. playRound is inside of playGame.
 
 function getComputerChoise() {
-    const randomNumber = Math.floor(Math.random() * 3);
+    const computerChoice = Math.floor(Math.random() * 3);
     
-    switch (randomNumber) {
+    switch (computerChoice) {
         case 0:
             return "rock";
         case 1:
@@ -17,4 +17,6 @@ function getComputerChoise() {
     }
 }
 
-console.log(getComputerChoise());
+function getHumanChoice() {
+    return String(prompt("Choose one: ROCK / PAPER / SCISSORS")).toLowerCase();
+}
