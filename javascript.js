@@ -4,9 +4,6 @@
 // Create function playRound() with 2 arguments - humanScore and computerScore, case insensitive, console.log()
 // playGame function - 5 rounds, declares winner at the end. playRound is inside of playGame.
 
-let humanScore = 0;
-let computerScore = 0;
-
 function getComputerChoise() {
     const computerChoice = Math.floor(Math.random() * 3);
 
@@ -24,61 +21,69 @@ function getHumanChoice() {
     return String(prompt("Choose one: ROCK / PAPER / SCISSORS")).toLowerCase();
 }
 
-function playRound(humanChoice, computerChoice) {
-
-    if (humanChoice == "rock") {
-        if (computerChoice == "rock") {
-            return "Computer: ROCK\nHuman: ROCK\nTie!";
-        } else if (computerChoice == "paper") {
-            computerScore += 1;
-            return "Computer: PAPER\nHuman: ROCK\nYou lose!";
-        } else {
-            humanScore += 1;
-            return "Computer: SCISSORS\nHuman: ROCK\nYou win!";
-        }
-    } else if (humanChoice == "paper") {
-        if (computerChoice == "rock") {
-            humanScore += 1;
-            return "Computer: ROCK\nHuman: PAPER\nYou win!";
-        } else if (computerChoice == "paper") {
-            return "Computer: PAPER\nHuman: PAPER\nTie!";
-        } else {
-            computerScore += 1;
-            return "Computer: SCISSORS\nHuman: PAPER\n You lose!";
-        }
-    } else {
-        if (computerChoice == "rock") {
-            computerScore += 1;
-            return "Computer: ROCK\nHuman: SCISSORS\nYou lose!";
-        } else if (computerChoice == "paper") {
-            humanScore += 1;
-            return "Computer: PAPER\nHuman: SCISSORS\nYou win!";
-        } else {
-            return "Computer: SCISSORS\nHuman: SCISSORS\nTie!";
-        }
-    }
-
-}
 
 function playGame() {
+    let humanScore = 0;
+    let computerScore = 0;
+
+    function playRound(humanChoice, computerChoice) {
+
+        if (humanChoice == "rock") {
+            if (computerChoice == "rock") {
+                return "Computer: ROCK\nHuman: ROCK\nTie!";
+            } else if (computerChoice == "paper") {
+                computerScore += 1;
+                return "Computer: PAPER\nHuman: ROCK\nYou lose!";
+            } else {
+                humanScore += 1;
+                return "Computer: SCISSORS\nHuman: ROCK\nYou win!";
+            }
+        } else if (humanChoice == "paper") {
+            if (computerChoice == "rock") {
+                humanScore += 1;
+                return "Computer: ROCK\nHuman: PAPER\nYou win!";
+            } else if (computerChoice == "paper") {
+                return "Computer: PAPER\nHuman: PAPER\nTie!";
+            } else {
+                computerScore += 1;
+                return "Computer: SCISSORS\nHuman: PAPER\n You lose!";
+            }
+        } else {
+            if (computerChoice == "rock") {
+                computerScore += 1;
+                return "Computer: ROCK\nHuman: SCISSORS\nYou lose!";
+            } else if (computerChoice == "paper") {
+                humanScore += 1;
+                return "Computer: PAPER\nHuman: SCISSORS\nYou win!";
+            } else {
+                return "Computer: SCISSORS\nHuman: SCISSORS\nTie!";
+            }
+        }
+
+    }
+
+    function endGame() {
+        humanScore = 0;
+        computerScore = 0;
+    }
+
+    function printFinalResult(computerScore, humanScore) {
+        const textResult = (humanScore > computerScore) ? "*** WINNER IS HUMAN ***" :
+            (computerScore > humanScore) ? "*** WINNER IS COMPUTER ***" : "*** TIE ***";
+        console.log("FINAL RESULT" + "\nComputer: " + computerScore + "\nHuman: " + humanScore + "\n" + textResult);
+    }
+
     console.log(playRound(getHumanChoice(), getComputerChoise()));
     console.log(playRound(getHumanChoice(), getComputerChoise()));
     console.log(playRound(getHumanChoice(), getComputerChoise()));
     console.log(playRound(getHumanChoice(), getComputerChoise()));
     console.log(playRound(getHumanChoice(), getComputerChoise()));
 
-    printResult(computerScore, humanScore);
+    printFinalResult(computerScore, humanScore);
 
     endGame();
 }
 
-function endGame() {
-    humanScore = 0;
-    computerScore = 0;
-}
 
-function printResult(computerScore, humanScore) {
-    console.log("Computer: " + computerScore + "\nHuman: " + humanScore);
-}
 
 playGame();
