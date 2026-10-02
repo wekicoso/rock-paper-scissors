@@ -60,3 +60,25 @@ function playRound(humanChoice, computerChoice) {
 
 }
 
+function playGame() {
+    console.log(playRound(getHumanChoice(), getComputerChoise()));
+    console.log(playRound(getHumanChoice(), getComputerChoise()));
+    console.log(playRound(getHumanChoice(), getComputerChoise()));
+    console.log(playRound(getHumanChoice(), getComputerChoise()));
+    console.log(playRound(getHumanChoice(), getComputerChoise()));
+
+    printResult(computerScore, humanScore);
+
+    endGame();
+}
+
+function endGame() {
+    humanScore = 0;
+    computerScore = 0;
+}
+
+function printResult(computerScore, humanScore) {
+    console.log("Computer: " + computerScore + "\nHuman: " + humanScore);
+}
+
+playGame();
