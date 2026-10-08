@@ -2,21 +2,37 @@
 let humanScore = 0;
 let computerScore = 0;
 
+const paraHumanScore = document.querySelector(".human");
+const paraComputerScore = document.querySelector(".computer");
+const btnReset = document.querySelector(".reset");
+
+
+document.addEventListener("DOMContentLoaded", (e) => {
+    result.style.visibility = 'hidden';
+});
+
+
 const result = document.querySelector("#result");
 // Event delegation through <div> - buttons parent
 const divButtons = document.querySelector("#buttons");
 divButtons.addEventListener("click", (event) => {
     let target = event.target;
+    result.style.visibility = 'visible';
 
     if (target.id == "btnRock" || target.id == "btnPaper" || target.id == "btnScissors") {
         const humanChoice = target.textContent.toLowerCase();
         const computerChoice = getComputerChoise().toLowerCase();
         const winner = playRound(humanChoice, computerChoice);
-        
+
         outputText(humanChoice, computerChoice, winner);
     }
 });
 
+btnReset.addEventListener('click', () => {
+    endGame();
+    updateTotalScoreParagraphs();
+    result.style.visibility = 'hidden';
+});
 
 function outputText(humanChoice, computerChoice, winner) {
     const paraHumanChoice = document.querySelector("#human");
@@ -29,14 +45,36 @@ function outputText(humanChoice, computerChoice, winner) {
 
     switch (winner) {
         case -1:
-            paraWinner.textContent += "COMPUTER!";
+            paraWinner.textContent += "computer!";
             break;
         case 0:
-            paraWinner.textContent += "TIE!";
+            paraWinner.textContent += "tie!";
             break;
         case 1:
-            paraWinner.textContent += "HUMAN!";
+            paraWinner.textContent += "human!";
     }
+
+    updateTotalScore(winner);
+}
+
+function updateTotalScoreParagraphs() {
+    paraHumanScore.textContent = "human: " + humanScore;
+    paraComputerScore.textContent = "computer: " + computerScore;
+}
+
+function updateTotalScore(winner) {
+
+
+    switch (winner) {
+        case -1:
+            computerScore++;
+            break;
+        case 1:
+            humanScore++;
+    }
+
+    updateTotalScoreParagraphs();
+
 }
 
 // Randomly choose for computer
@@ -82,7 +120,7 @@ function playRound(humanChoice, computerChoice) {
     }
 }
 
-// Reseting score, can be asigned to some new button
+// Reseting score here
 function endGame() {
     humanScore = 0;
     computerScore = 0;

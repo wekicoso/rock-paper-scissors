@@ -27,3 +27,12 @@ h3 {
     width: 100%;
     text-align: center;
 }
+
+#totalResult {
+    display: flex;
+    flex-direction: row;
+    column-gap: 100px;
+    text-align: left;
+    align-items: center;
+    justify-content: center;
+}
