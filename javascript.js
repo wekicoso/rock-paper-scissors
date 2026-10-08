@@ -2,16 +2,23 @@
 let humanScore = 0;
 let computerScore = 0;
 
+const result = document.querySelector("#result");
 // Event delegation through <div> - buttons parent
 const divButtons = document.querySelector("#buttons");
-
 divButtons.addEventListener("click", (event) => {
     let target = event.target;
 
     if (target.id == "btnRock" || target.id == "btnPaper" || target.id == "btnScissors") {
-        console.log(playRound(target.textContent.toLowerCase(), getComputerChoise()));
+        const humanChoice = target.textContent.toLowerCase();
+        const computerChoice = getComputerChoise().toLowerCase();
+        const winner = playRound(humanChoice, computerChoice);
+        
+        switch (winner) {
+            
+        }
     }
 });
+
 
 // Randomly choose for computer
 function getComputerChoise() {
@@ -27,41 +34,33 @@ function getComputerChoise() {
     }
 }
 
-// Function that is handling chooses and returning winner
+// Function that is handling chooses and returning 1 / 0 / -1 (win / tie / lose);
 function playRound(humanChoice, computerChoice) {
-    alert(humanChoice);
     if (humanChoice == "rock") {
-        if (computerChoice == "rock") {
-            return "Computer: ROCK\nHuman: ROCK\nTie!";
+        if (computerChoice == "scissors") {
+            return 1;
         } else if (computerChoice == "paper") {
-            computerScore += 1;
-            return "Computer: PAPER\nHuman: ROCK\nYou lose!";
+            return -1;
         } else {
-            humanScore += 1;
-            return "Computer: SCISSORS\nHuman: ROCK\nYou win!";
+            return 0;
         }
     } else if (humanChoice == "paper") {
-        if (computerChoice == "rock") {
-            humanScore += 1;
-            return "Computer: ROCK\nHuman: PAPER\nYou win!";
+        if (computerChoice == "scissors") {
+            return -1;
         } else if (computerChoice == "paper") {
-            return "Computer: PAPER\nHuman: PAPER\nTie!";
+            return 0;
         } else {
-            computerScore += 1;
-            return "Computer: SCISSORS\nHuman: PAPER\n You lose!";
+            return 1;
         }
-    } else {
-        if (computerChoice == "rock") {
-            computerScore += 1;
-            return "Computer: ROCK\nHuman: SCISSORS\nYou lose!";
+    } else if (humanChoice == "scissors") {
+        if (computerChoice == "scissors") {
+            return 0;
         } else if (computerChoice == "paper") {
-            humanScore += 1;
-            return "Computer: PAPER\nHuman: SCISSORS\nYou win!";
+            return 1;
         } else {
-            return "Computer: SCISSORS\nHuman: SCISSORS\nTie!";
+            return -1;
         }
     }
-
 }
 
 // Reseting score, can be asigned to some new button
