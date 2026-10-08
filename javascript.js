@@ -13,12 +13,31 @@ divButtons.addEventListener("click", (event) => {
         const computerChoice = getComputerChoise().toLowerCase();
         const winner = playRound(humanChoice, computerChoice);
         
-        switch (winner) {
-            
-        }
+        outputText(humanChoice, computerChoice, winner);
     }
 });
 
+
+function outputText(humanChoice, computerChoice, winner) {
+    const paraHumanChoice = document.querySelector("#human");
+    const paraComputerChoice = document.querySelector("#computer");
+    const paraWinner = document.querySelector("#winner");
+
+    paraHumanChoice.textContent = "HUMAN: " + humanChoice;
+    paraComputerChoice.textContent = "COMPUTER: " + computerChoice;
+    paraWinner.textContent = "WINNER: ";
+
+    switch (winner) {
+        case -1:
+            paraWinner.textContent += "COMPUTER!";
+            break;
+        case 0:
+            paraWinner.textContent += "TIE!";
+            break;
+        case 1:
+            paraWinner.textContent += "HUMAN!";
+    }
+}
 
 // Randomly choose for computer
 function getComputerChoise() {
